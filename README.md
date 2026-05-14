@@ -1,4 +1,4 @@
-# Advanced Parameters Extension
+# SillyTavern-CustomParameters
 
 <img width="2560" height="1402" alt="image" src="https://github.com/user-attachments/assets/ab9c851e-9efb-4c14-bee8-0ea6498a99be" />
 
