@@ -243,10 +243,24 @@ Extension-AdvancedParameters/
 - Confirm the property name matches API expectations
 - Check the Chat Completion request log
 
+---
+
+## Support
+
+- **Discord**: [https://discord.gg/2tJcWeMjFQ](https://discord.gg/2tJcWeMjFQ)
+- **SillyTavern Discord**: Find me on the official server
+- **GitHub Issues**: Bug reports and feature requests
+
+---
+
+## Support Development
+
+[Patreon](https://www.patreon.com/cw/IceFog72)
+
 ## License
 
 AGPL-3.0
 
 ## Credits
 
-Built upon the [Extension-CustomSliders](https://github.com/SillyTavern/Extension-CustomSliders) codebase, expanded to support comprehensive parameter configuration for advanced LLM APIs. [Extension-AdvancedParameters](https://github.com/SillyTavern/Extension-AdvancedParameters)
+Built upon the [Extension-CustomSliders](https://github.com/SillyTavern/Extension-CustomSliders) codebase, expanded to support comprehensive parameter configuration for advanced LLM APIs.
