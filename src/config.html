@@ -1,4 +1,4 @@
-<div class="flex-container flexFlowColumn flexNoGap">
+<div class="parameter-config-container flex-container flexFlowColumn flexNoGap">
     <div class="flex-container justifyContentFlexEnd">
         <label class="checkbox_label">
             <input type="checkbox" name="enabled">
@@ -7,23 +7,47 @@
     </div>
     <div class="flex-container alignItemsBaseline">
         <small class="flex1 textAlignRight">Name</small>
-        <input class="flex2 text_pole textarea_compact" type="text" name="name" placeholder="e.g. Min P">
+        <input class="flex2 text_pole textarea_compact" type="text" name="name" placeholder="e.g. Temperature">
     </div>
     <div class="flex-container alignItemsBaseline">
         <small class="flex1 textAlignRight">Property</small>
-        <input class="flex2 text_pole textarea_compact" type="text" name="property" placeholder="e.g. min_p">
+        <input class="flex2 text_pole textarea_compact" type="text" name="property" placeholder="e.g. temperature">
     </div>
     <div class="flex-container alignItemsBaseline">
-        <small class="flex1 textAlignRight">Min Value</small>
-        <input class="flex2 text_pole textarea_compact" type="text" name="min" placeholder="e.g. 0">
+        <small class="flex1 textAlignRight">Type</small>
+        <select class="flex2 text_pole" name="type">
+            <option value="slider">Slider (Range)</option>
+            <option value="number">Number Input</option>
+            <option value="text">Text Input</option>
+            <option value="textarea">Text Area</option>
+            <option value="checkbox">Checkbox (Boolean)</option>
+            <option value="select">Select Dropdown</option>
+            <option value="multiselect">Multi-Select</option>
+            <option value="array">Array / List</option>
+            <option value="object">Object (JSON)</option>
+        </select>
     </div>
-    <div class="flex-container alignItemsBaseline">
-        <small class="flex1 textAlignRight">Max Value</small>
-        <input class="flex2 text_pole textarea_compact" type="text" name="max" placeholder="e.g. 1">
-    </div>
-    <div class="flex-container alignItemsBaseline">
+    <div class="flex-container alignItemsBaseline" style="display: none;" data-type="range">
+        <small class="flex1 textAlignRight">Min</small>
+        <input class="flex1 text_pole textarea_compact" type="number" name="min" placeholder="0" step="any">
+        <small class="flex1 textAlignRight">Max</small>
+        <input class="flex1 text_pole textarea_compact" type="number" name="max" placeholder="2" step="any">
         <small class="flex1 textAlignRight">Step</small>
-        <input class="flex2 text_pole textarea_compact" type="text" name="step" placeholder="e.g. 0.01">
+        <input class="flex1 text_pole textarea_compact" type="number" name="step" placeholder="0.01" step="any">
+    </div>
+    <div class="flex-container alignItemsBaseline" style="display: none;" data-type="array">
+        <small class="flex1 textAlignRight">Delimiter</small>
+        <input class="flex2 text_pole textarea_compact" type="text" name="arrayDelimiter" placeholder="e.g. ," value=",">
+    </div>
+    <div class="flex-container justifyContentFlexEnd" style="display: none;" data-type="array">
+        <label class="checkbox_label">
+            <input type="checkbox" name="arrayAsString">
+            <small>Output as String (not array)</small>
+        </label>
+    </div>
+    <div class="flex-container alignItemsBaseline">
+        <small class="flex1 textAlignRight">Description</small>
+        <input class="flex2 text_pole textarea_compact" type="text" name="description" placeholder="Optional description">
     </div>
     <div class="flex-container justifyCenter">
         <button class="menu_button menu_button_icon" name="up" type="button">

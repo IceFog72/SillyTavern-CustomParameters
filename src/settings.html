@@ -1,44 +1,52 @@
-<div id="custom_sliders_settings">
+<div class="advanced-parameters-extension">
     <div class="inline-drawer">
         <div class="inline-drawer-toggle inline-drawer-header">
-            <b>
-                <span>Custom Sliders</span>
-            </b>
-            <div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div>
+            <b>Advanced Parameters</b>
+            <div class="inline-drawer-icon fa-solid fa-circle-chevron-down down interactable" tabindex="0"
+                role="button"></div>
         </div>
         <div class="inline-drawer-content">
-            <div id="custom_sliders_hint" class="info-block hint">
-                Select Custom (OpenAI-compatible) as a Chat Completion Source to use this extension.
+            <div id="advanced_params_container" class="advanced-params-container" style="padding-top: 10px;">
+                <label class="checkbox_label" style="margin-bottom: 10px;">
+                    <input id="advanced_params_enabled" type="checkbox" />
+                    <span data-i18n="Enabled">Enabled</span>
+                </label>
+                <p class="hint" id="advanced_params_hint" style="display: none; color: #ff6b6b; margin: 10px 0;">
+                    Note: Advanced Parameters work with "Custom" API source only.
+                </p>
+
+                <div class="flex-container" style="gap: 5px; margin-bottom: 15px;">
+                    <select id="advanced_params_collections" class="text_pole" style="flex: 1;"></select>
+                    <button id="advanced_params_create_collection" class="menu_button menu_button_icon"
+                        title="Create new collection">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <button id="advanced_params_delete_collection" class="menu_button menu_button_icon"
+                        title="Delete collection">
+                        <i class="fa-solid fa-trash-alt"></i>
+                    </button>
+                    <button id="advanced_params_bind_to_preset" class="menu_button menu_button_icon"
+                        title="Bind to current preset">
+                        <i class="fa-solid fa-link"></i>
+                    </button>
+                    <button id="advanced_params_import_collection" class="menu_button menu_button_icon"
+                        title="Import collection">
+                        <i class="fa-solid fa-file-import"></i>
+                    </button>
+                    <button id="advanced_params_export_collection" class="menu_button menu_button_icon"
+                        title="Export collection">
+                        <i class="fa-solid fa-file-export"></i>
+                    </button>
+                    <input id="advanced_params_import_file" type="file" accept=".json" style="display: none;">
+                </div>
+
+                <button id="advanced_params_create" class="menu_button">
+                    <i class="fa-solid fa-plus"></i> Create Parameter
+                </button>
+
+                <div id="advanced_params_list" class="parameters-list" style="margin-top: 15px;">
+                </div>
             </div>
-            <div class="flex-container">
-                <input type="file" id="custom_sliders_import_file" hidden accept=".json">
-                <select class="text_pole flex1" id="custom_sliders_collections"></select>
-                <div id="custom_sliders_create_collection" class="menu_button menu_button_icon" title="Create New Collection">
-                    <i class="fa-solid fa-file-circle-plus"></i>
-                </div>
-                <div id="custom_sliders_bind_to_preset" class="menu_button menu_button_icon" title="Bind collection to Preset">
-                    <i class="fa-solid fa-link"></i>
-                </div>
-                <div id="custom_sliders_import_collection" class="menu_button menu_button_icon" title="Import Collection">
-                    <i class="fa-solid fa-file-import"></i>
-                </div>
-                <div id="custom_sliders_export_collection" class="menu_button menu_button_icon" title="Export Collection">
-                    <i class="fa-solid fa-file-export"></i>
-                </div>
-                <div id="custom_sliders_delete_collection" class="menu_button menu_button_icon" title="Delete Collection">
-                    <i class="fa-solid fa-trash-alt"></i>
-                </div>
-            </div>
-            <div class="flex-container">
-                <div id="custom_sliders_create" class="menu_button menu_button_icon">
-                    <i class="fa-solid fa-plus"></i>
-                    <span data-i18n="Create Slider">
-                        Create Slider
-                    </span>
-                </div>
-            </div>
-            <hr>
-            <div id="custom_sliders_list"></div>
         </div>
     </div>
 </div>

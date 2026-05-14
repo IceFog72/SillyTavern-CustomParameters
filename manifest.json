@@ -1,12 +1,11 @@
 {
-    "display_name": "Custom Sliders",
+    "display_name": "Custom Parameters",
     "loading_order": 1,
     "requires": [],
     "optional": [],
     "js": "dist/index.js",
-    "css": "",
-    "author": "Cohee1207",
-    "version": "1.0.0",
-    "homePage": "https://github.com/SillyTavern/Extension-CustomSliders",
+    "author": "IceFog72",
+    "version": "0.1.0",
+    "homePage": "https://github.com/SillyTavern/SillyTavern-CustomParameters/",
     "auto_update": true
 }

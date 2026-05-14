@@ -1,13 +1,307 @@
-#custom_sliders_list .textAlignRight {
-    text-align: right;
+/**
+ * @extension Advanced Parameters
+ * @namespace advanced-parameters
+ * Extension: Extension-AdvancedParameters
+ * Purpose: Provides UI for configuring advanced API parameters
+ */
+
+/* Advanced Parameters Extension Styles - Namespaced */
+
+.advanced-parameters-extension .advanced-params-container,
+.advanced-parameters-extension .advanced_params_container {
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
-#custom_sliders_list .empty-message {
-    text-align: center;
-    opacity: 0.8;
+.advanced-parameters-extension .advanced-params-container h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.advanced-parameters-extension .advanced-params-container .hint {
+    padding: 8px 12px;
+    background-color: rgba(255, 107, 107, 0.1);
+    border-left: 3px solid #ff6b6b;
+    border-radius: 3px;
     font-size: 0.9em;
 }
 
-.custom_sliders_container {
-    display: contents;
+.advanced-parameters-extension .parameters-list {
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.advanced-parameters-extension .parameters-list hr {
+    margin: 15px 0;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.advanced-parameters-extension .parameter-config-container {
+    padding: 12px;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.advanced-parameters-extension .parameter-config-container .flex-container {
+    margin-bottom: 8px;
+}
+
+.advanced-parameters-extension .parameter-config-container input,
+.advanced-parameters-extension .parameter-config-container select,
+.advanced-parameters-extension .parameter-config-container textarea {
+    padding: 6px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: inherit;
+    font-family: inherit;
+}
+
+.advanced-parameters-extension .parameter-config-container input:focus,
+.advanced-parameters-extension .parameter-config-container select:focus,
+.advanced-parameters-extension .parameter-config-container textarea:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.advanced-parameters-extension .parameter-config-container .checkbox_label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.advanced-parameters-extension .parameter-config-container .checkbox_label input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.advanced-parameters-extension .parameter-config-container .flex1 {
+    flex: 1;
+}
+
+.advanced-parameters-extension .parameter-config-container .flex2 {
+    flex: 2;
+}
+
+.advanced-parameters-extension .parameter-config-container .textAlignRight {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.advanced-parameters-extension .parameter-config-container .alignItemsBaseline {
+    align-items: baseline;
+}
+
+.advanced-parameters-extension .parameter-config-container .justifyCenter {
+    justify-content: center;
+    gap: 5px;
+}
+
+.advanced-parameters-extension .parameter-config-container .justifyContentFlexEnd {
+    justify-content: flex-end;
+}
+
+/* Parameter block (runtime display) */
+.advanced-parameters-extension .advanced_params_container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+}
+
+.advanced-parameters-extension textarea.textarea_compact {
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    line-height: 1.4;
+    transition: all 0.2s ease;
+    border-radius: 5px;
+    color: #e0e0e0;
+}
+
+.advanced-parameters-extension textarea.textarea_compact:focus {
+    background-color: rgba(0, 0, 0, 0.35);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.advanced-parameters-extension textarea.textarea_compact::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+    font-style: italic;
+}
+
+.advanced-parameters-extension .advanced-params-preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.advanced-parameters-extension .advanced-params-preview-header i:hover {
+    color: #fff;
+    opacity: 1;
+}
+
+.advanced-parameters-extension .parameter-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.advanced-parameters-extension .parameter-block-title {
+    font-weight: 600;
+    font-size: 0.95em;
+}
+
+.advanced-parameters-extension .parameter-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.advanced-parameters-extension .parameter-slider-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.advanced-parameters-extension .parameter-slider-wrapper input[type="range"] {
+    flex: 1;
+    min-height: 24px;
+    cursor: pointer;
+}
+
+.advanced-parameters-extension .parameter-slider-wrapper input[type="number"] {
+    width: 80px;
+    padding: 6px 8px;
+    text-align: right;
+}
+
+.advanced-parameters-extension .parameter-input-container input[type="text"],
+.advanced-parameters-extension .parameter-input-container input[type="number"],
+.advanced-parameters-extension .parameter-input-container select,
+.advanced-parameters-extension .parameter-input-container textarea {
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: inherit;
+    font-family: inherit;
+    font-size: 0.95em;
+}
+
+.advanced-parameters-extension .parameter-input-container input[type="text"]:focus,
+.advanced-parameters-extension .parameter-input-container input[type="number"]:focus,
+.advanced-parameters-extension .parameter-input-container select:focus,
+.advanced-parameters-extension .parameter-input-container textarea:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.advanced-parameters-extension .parameter-input-container input[type="checkbox"] {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+
+.advanced-parameters-extension .parameter-input-container textarea {
+    resize: vertical;
+    min-height: 80px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.advanced-parameters-extension .empty-message {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    font-style: italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .advanced-parameters-extension .parameters-list {
+        max-height: 400px;
+    }
+
+    .advanced-parameters-extension .parameter-slider-wrapper {
+        flex-direction: column;
+    }
+
+    .advanced-parameters-extension .parameter-slider-wrapper input[type="range"] {
+        width: 100%;
+    }
+
+    .advanced-parameters-extension .parameter-config-container .flex-container {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .advanced-parameters-extension .parameter-config-container .textAlignRight {
+        text-align: left;
+        padding-right: 0;
+    }
+}
+
+/* HTML compatibility - namespaced */
+.advanced-parameters-extension .flex-container {
+    display: flex;
+    gap: 8px;
+}
+
+.advanced-parameters-extension .flexFlowColumn {
+    flex-direction: column;
+}
+
+.advanced-parameters-extension .flexNoGap {
+    gap: 0;
+}
+
+.advanced-parameters-extension .text_pole,
+.advanced-parameters-extension .textarea_compact {
+    padding: 6px 8px;
+}
+
+.advanced-parameters-extension .menu_button {
+    padding: 6px 12px;
+    color: inherit;
+    cursor: pointer;
+    width: unset !important;
+}
+
+.advanced-parameters-extension .menu_button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.advanced-parameters-extension .menu_button_icon {
+    padding: 6px 8px;
+    min-width: 36px;
+
+}
+
+.advanced-parameters-extension .toggleEnabled {
+    background-color: rgba(76, 175, 80, 0.2);
+    border-color: rgba(76, 175, 80, 0.5);
 }
