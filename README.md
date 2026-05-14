@@ -1,5 +1,8 @@
 # Advanced Parameters Extension
 
+<img width="2560" height="1402" alt="image" src="https://github.com/user-attachments/assets/06114e26-58d0-4f01-88d0-ec97760c4535" />
+
+
 A comprehensive SillyTavern extension that goes beyond sliders to allow configuration of all types of parameters for custom OpenAI-compatible APIs. This extension supports multiple input types and can configure complex parameter structures.
 
 ## Features
