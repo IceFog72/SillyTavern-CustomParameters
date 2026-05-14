@@ -912,7 +912,7 @@ function createParameterInput(parameter: ParameterModel, paramId: string, contai
             const updateValue = () => {
                 parameter.value = parseFloat(input.value);
                 numberInput.value = input.value;
-                renderCompletionParameters(settings);
+                updateParameterPreview(settings);
                 saveSettingsDebounced();
             };
 
@@ -920,7 +920,7 @@ function createParameterInput(parameter: ParameterModel, paramId: string, contai
             numberInput.addEventListener('input', () => {
                 parameter.value = parseFloat(numberInput.value);
                 input.value = numberInput.value;
-                renderCompletionParameters(settings);
+                updateParameterPreview(settings);
                 saveSettingsDebounced();
             });
 
@@ -942,7 +942,7 @@ function createParameterInput(parameter: ParameterModel, paramId: string, contai
             input.value = (parameter.value ?? 0).toString();
             input.addEventListener('input', () => {
                 parameter.value = parseFloat(input.value);
-                renderCompletionParameters(settings);
+                updateParameterPreview(settings);
                 saveSettingsDebounced();
             });
             container.appendChild(input);
@@ -957,7 +957,7 @@ function createParameterInput(parameter: ParameterModel, paramId: string, contai
             input.className = 'text_pole';
             input.addEventListener('input', () => {
                 parameter.textValue = input.value;
-                renderCompletionParameters(settings);
+                updateParameterPreview(settings);
                 saveSettingsDebounced();
             });
             container.appendChild(input);
@@ -972,7 +972,7 @@ function createParameterInput(parameter: ParameterModel, paramId: string, contai
             textarea.rows = 4;
             textarea.addEventListener('input', () => {
                 parameter.textValue = textarea.value;
-                renderCompletionParameters(settings);
+                updateParameterPreview(settings);
                 saveSettingsDebounced();
             });
             container.appendChild(textarea);
@@ -986,7 +986,7 @@ function createParameterInput(parameter: ParameterModel, paramId: string, contai
             input.checked = parameter.boolValue ?? false;
             input.addEventListener('change', () => {
                 parameter.boolValue = input.checked;
-                renderCompletionParameters(settings);
+                updateParameterPreview(settings);
                 saveSettingsDebounced();
             });
             container.appendChild(input);
@@ -1006,7 +1006,7 @@ function createParameterInput(parameter: ParameterModel, paramId: string, contai
             select.value = (parameter.selectValue as string) || '';
             select.addEventListener('change', () => {
                 parameter.selectValue = select.value;
-                renderCompletionParameters(settings);
+                updateParameterPreview(settings);
                 saveSettingsDebounced();
             });
             container.appendChild(select);
@@ -1026,7 +1026,7 @@ function createParameterInput(parameter: ParameterModel, paramId: string, contai
                     .split(delimiter)
                     .map(v => v.trim())
                     .filter(v => v.length > 0);
-                renderCompletionParameters(settings);
+                updateParameterPreview(settings);
                 saveSettingsDebounced();
             });
             container.appendChild(textarea);
@@ -1046,7 +1046,7 @@ function createParameterInput(parameter: ParameterModel, paramId: string, contai
                     parameter.objectValue = JSON.parse(jsonText);
                     parameter.objectRaw = textarea.value;
                     textarea.style.borderColor = '';
-                    renderCompletionParameters(settings);
+                    updateParameterPreview(settings);
                     saveSettingsDebounced();
                 } catch {
                     textarea.style.borderColor = 'red';
