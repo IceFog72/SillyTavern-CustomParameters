@@ -8,6 +8,9 @@ const { saveSettingsDebounced, event_types, eventSource, chatCompletionSettings,
 
 const MODULE_NAME = 'advancedParameters';
 
+const GENERATION_TYPES = ['normal', 'regenerate', 'continue', 'impersonate', 'swipe', 'quiet', 'group_chat'] as const;
+type GenerationType = typeof GENERATION_TYPES[number];
+
 type ParameterType = 'slider' | 'text' | 'number' | 'checkbox' | 'select' | 'array' | 'object' | 'textarea' | 'multiselect';
 
 interface ParameterModel {
@@ -42,6 +45,9 @@ interface ParameterModel {
     // For objects (JSON)
     objectValue?: Record<string, unknown> | unknown[];
     objectRaw?: string;
+
+    // Trigger filter — which generation types activate this parameter (empty = all)
+    triggerTypes?: GenerationType[];
 }
 
 interface ParameterCollection {
@@ -62,6 +68,7 @@ interface GlobalSettings {
 }
 
 interface ChatCompletionRequestData {
+    type: string;
     chat_completion_source: string;
     custom_include_body: string;
 }
@@ -599,6 +606,25 @@ function renderParameterConfigs(settings: ExtensionSettings): void {
             }
         });
 
+        // Wire trigger-type checkboxes
+        const triggerCheckboxes = Array.from(
+            renderer.content.querySelectorAll('input[data-trigger-type]'),
+        ) as HTMLInputElement[];
+        const currentTriggers = parameter.triggerTypes ?? [];
+        triggerCheckboxes.forEach(cb => {
+            cb.checked = currentTriggers.includes(cb.dataset.triggerType as GenerationType);
+            cb.addEventListener('change', () => {
+                parameter.triggerTypes = triggerCheckboxes
+                    .filter(c => c.checked)
+                    .map(c => c.dataset.triggerType as GenerationType);
+                saveSettingsDebounced();
+                updateTriggerTypeAvailability(activeCollection);
+            });
+        });
+
+        // Tag container so updateTriggerTypeAvailability can find it
+        container.dataset.paramId = parameter.id;
+
         elements.list.appendChild(renderer.content);
         renderParameterUI(settings, parameter);
         elements.list.appendChild(document.createElement('hr'));
@@ -612,12 +638,48 @@ function renderParameterConfigs(settings: ExtensionSettings): void {
     }
 
     renderCompletionParameters(settings);
+    updateTriggerTypeAvailability(activeCollection);
     renderHint();
 }
 
 function renderParameterUI(settings: ExtensionSettings, parameter: ParameterModel): void {
     // This would render type-specific UI controls
     // For now, this is a placeholder that can be extended
+}
+
+/**
+ * For parameters that share the same property name, disable trigger-type checkboxes
+ * already claimed by a sibling so the sets stay mutually exclusive.
+ */
+function updateTriggerTypeAvailability(collection: ParameterCollection): void {
+    const elements = getUIElements();
+    if (!elements.list) return;
+
+    // Group params by property
+    const byProp: Record<string, ParameterModel[]> = {};
+    collection.parameters.forEach(p => {
+        if (!p.property) return;
+        (byProp[p.property] ??= []).push(p);
+    });
+
+    collection.parameters.forEach(param => {
+        const block = elements.list.querySelector<HTMLDivElement>(`[data-param-id="${CSS.escape(param.id)}"]`);
+        if (!block) return;
+
+        // Types taken by OTHER params with the same property
+        const takenByOthers = new Set<string>();
+        (byProp[param.property] ?? []).forEach(sibling => {
+            if (sibling.id === param.id) return;
+            (sibling.triggerTypes ?? []).forEach(t => takenByOthers.add(t));
+        });
+
+        block.querySelectorAll<HTMLInputElement>('input[data-trigger-type]').forEach(cb => {
+            const taken = takenByOthers.has(cb.dataset.triggerType!);
+            cb.disabled = taken;
+            const label = cb.closest('label') as HTMLLabelElement | null;
+            if (label) label.style.opacity = taken ? '0.4' : '';
+        });
+    });
 }
 
 function mergeYamlIntoObject(obj: object, yamlString: string) {
@@ -1068,13 +1130,18 @@ function setupEventHandlers(settings: ExtensionSettings): void {
             return;
         }
 
+        const genType = (data.type ?? 'normal') as GenerationType;
         const customBody = mergeYamlIntoObject({}, data.custom_include_body);
-        const parameters = activeCollection.parameters.filter(p => p.enabled).reduce((acc, param) => {
-            if (param.property) {
+        const parameters = activeCollection.parameters
+            .filter(p => p.enabled && p.property)
+            .filter(p => {
+                const triggers = p.triggerTypes ?? [];
+                return triggers.length === 0 || triggers.includes(genType);
+            })
+            .reduce((acc, param) => {
                 acc[param.property] = getParameterValue(param);
-            }
-            return acc;
-        }, {} as Record<string, unknown>);
+                return acc;
+            }, {} as Record<string, unknown>);
         Object.assign(customBody, parameters);
         data.custom_include_body = stringify(customBody);
     });

@@ -1,4 +1,6 @@
 import './style.css';
+declare const GENERATION_TYPES: readonly ["normal", "regenerate", "continue", "impersonate", "swipe", "quiet", "group_chat"];
+type GenerationType = typeof GENERATION_TYPES[number];
 type ParameterType = 'slider' | 'text' | 'number' | 'checkbox' | 'select' | 'array' | 'object' | 'textarea' | 'multiselect';
 interface ParameterModel {
     id: string;
@@ -20,6 +22,7 @@ interface ParameterModel {
     arrayAsString?: boolean;
     objectValue?: Record<string, unknown> | unknown[];
     objectRaw?: string;
+    triggerTypes?: GenerationType[];
 }
 interface ParameterCollection {
     active: boolean;

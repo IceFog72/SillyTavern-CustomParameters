@@ -49,6 +49,22 @@
         <small class="flex1 textAlignRight">Description</small>
         <input class="flex2 text_pole textarea_compact" type="text" name="description" placeholder="Optional description">
     </div>
+    <div class="flex-container alignItemsBaseline">
+        <small class="flex1 textAlignRight">Triggers on</small>
+        <div class="flex2 trigger-types-group">
+            <label class="checkbox_label" title="Normal send"><input type="checkbox" data-trigger-type="normal"><small>Send</small></label>
+            <label class="checkbox_label" title="Regenerate"><input type="checkbox" data-trigger-type="regenerate"><small>Regen</small></label>
+            <label class="checkbox_label" title="Continue"><input type="checkbox" data-trigger-type="continue"><small>Continue</small></label>
+            <label class="checkbox_label" title="Impersonate"><input type="checkbox" data-trigger-type="impersonate"><small>Imp.</small></label>
+            <label class="checkbox_label" title="Swipe"><input type="checkbox" data-trigger-type="swipe"><small>Swipe</small></label>
+            <label class="checkbox_label" title="Quiet / slash commands"><input type="checkbox" data-trigger-type="quiet"><small>Quiet</small></label>
+            <label class="checkbox_label" title="Group chat turn"><input type="checkbox" data-trigger-type="group_chat"><small>Group</small></label>
+        </div>
+    </div>
+    <div class="flex-container">
+        <small class="flex1"></small>
+        <small class="flex2" style="color: var(--SmallFontSecondaryColor, #888); font-style: italic;">None checked = triggers on all types</small>
+    </div>
     <div class="flex-container justifyCenter">
         <button class="menu_button menu_button_icon" name="up" type="button">
             <i class="fa-solid fa-chevron-up"></i>
